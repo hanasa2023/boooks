@@ -1,8 +1,8 @@
 export interface BookData {
   id: number
   name: string
-  list: string
-  fullname: string
+  listName: string
+  fullName: string
 }
 
 export interface ListData {

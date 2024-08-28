@@ -12,6 +12,7 @@
   "dependencies": {
     "@tauri-apps/api": ">=2.0.0-rc.0",
     "@tauri-apps/plugin-shell": ">=2.0.0-rc.0",
+    "axios": "^1.7.5",
     "vue": "^3.3.4",
     "vue-router": "^4.4.3",
     "vuetify": "^3.7.0"
@@ -20,6 +21,8 @@
     "@mdi/font": "^7.4.47",
     "@tauri-apps/cli": ">=2.0.0-rc.0",
     "@vitejs/plugin-vue": "^5.0.5",
+    "javascript-obfuscator": "^4.1.1",
+    "rollup-plugin-obfuscator": "^1.1.0",
     "sass": "^1.77.8",
     "sass-loader": "^16.0.1",
     "typescript": "^5.2.2",

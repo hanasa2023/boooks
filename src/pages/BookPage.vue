@@ -10,8 +10,8 @@
           <BookCard
             :id="data.id"
             :name="data.name"
-            :fullname="data.fullname"
-            :list="data.list"
+            :full-name="data.fullName"
+            :list-name="data.listName"
           />
         </v-col>
       </v-row>
@@ -20,11 +20,11 @@
 </template>
 
 <script setup lang="ts">
-import { invoke } from '@tauri-apps/api/core'
 import BookCard from '../components/BookCard.vue'
 import { BookData } from '../utils/typing'
 import { computed, onMounted, ref } from 'vue'
 import { useDisplay } from 'vuetify'
+import axios from 'axios'
 
 const { name } = useDisplay()
 const reactiveCols = computed<number>(() => {
@@ -50,9 +50,11 @@ const props = defineProps<{
 
 const bookList = ref<BookData[]>([])
 async function findBooksByList() {
-  bookList.value = await invoke<BookData[]>('find_books_by_list', {
-    list: props.listName,
-  })
+  bookList.value = (
+    await axios.post('/apis/api/books/get', {
+      listName: props.listName,
+    })
+  ).data
 }
 
 onMounted(async () => {

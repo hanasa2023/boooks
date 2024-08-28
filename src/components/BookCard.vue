@@ -1,6 +1,6 @@
 <template>
-  <v-card :href="`/${list}/${fullname}`" :width="200" :elevation="12">
-    <v-img :src="`/imgs/${list}/${name}.jpg`"></v-img>
+  <v-card :href="`/apis/${listName}/${fullName}`" :width="200" :elevation="12">
+    <v-img :src="`/apis/imgs/${listName}/${name}.webp`"></v-img>
   </v-card>
 </template>
 
