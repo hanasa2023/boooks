@@ -51,7 +51,7 @@ const props = defineProps<{
 const bookList = ref<BookData[]>([])
 async function findBooksByList() {
   bookList.value = (
-    await axios.post('/apis/api/books/get', {
+    await axios.post('/apis/v1/books/get', {
       listName: props.listName,
     })
   ).data

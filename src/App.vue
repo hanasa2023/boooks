@@ -23,17 +23,22 @@
         <v-list-item prepend-icon="mdi-home" title="主页" @click="goHome()">
         </v-list-item>
         <v-list-item
-          v-for="(data, index) in lists"
+          v-for="(name, index) in lists.list"
           :key="index"
           prepend-icon="mdi-view-dashboard"
-          :title="data.name == 'hxy' ? '核学院' : data.name"
-          @click="goBook(data.name)"
+          :title="name == 'hxy' ? '核学院' : name"
+          @click="goBook(name)"
         ></v-list-item>
       </v-list>
+      <template #append>
+        <div class="mx-3 my-2">
+          <v-btn block @click="goLogin()"> Manage </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
     <v-main>
       <router-view></router-view>
-    </v-main>
+    </v-main ManagePage>
     <div class="site-footer">
       <footer
         class="site-info"
@@ -54,18 +59,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { ListData } from './utils/typing'
-import axios from 'axios'
+import { useListStore } from './state';
+import { getLists } from './utils/common';
 
 const drawer = ref<boolean>(false)
 const router = useRouter()
 
-const lists = ref<ListData[]>([])
-
-async function getLists() {
-  const data = await axios.post('/apis/api/lists/all')
-  lists.value = data.data
-}
+const lists = useListStore()
 
 function goHome() {
   drawer.value = false
@@ -75,6 +75,11 @@ function goHome() {
 function goBook(path: string) {
   drawer.value = false
   router.push(`/books/${path}`)
+}
+
+function goLogin() {
+  drawer.value = false
+  router.push('/login')
 }
 
 onMounted(async () => {
