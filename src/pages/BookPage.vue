@@ -7,13 +7,11 @@
           v-for="(data, index) in bookList"
           :key="index"
         >
-          <BookCard
-            :id="data.id"
-            :name="data.name"
-            :full-name="data.fullName"
-            :list-name="data.listName"
-          />
+          <BookCard :name="data.name" :list-name="listName" :sign="data.sign" />
         </v-col>
+        <v-col :cols="reactiveCols"
+          ><BookCard name="test" list-name="none" sign=""
+        /></v-col>
       </v-row>
     </v-container>
   </div>
@@ -21,10 +19,10 @@
 
 <script setup lang="ts">
 import BookCard from '../components/BookCard.vue'
-import { BookData } from '../utils/typing'
+import { FSData } from '../utils/typing'
 import { computed, onMounted, ref } from 'vue'
 import { useDisplay } from 'vuetify'
-import axios from 'axios'
+import { findBooksByList } from '../utils/common'
 
 const { name } = useDisplay()
 const reactiveCols = computed<number>(() => {
@@ -48,17 +46,10 @@ const props = defineProps<{
   listName: string
 }>()
 
-const bookList = ref<BookData[]>([])
-async function findBooksByList() {
-  bookList.value = (
-    await axios.post('/apis/v1/books/get', {
-      listName: props.listName,
-    })
-  ).data
-}
+const bookList = ref<FSData[]>([])
 
 onMounted(async () => {
-  await findBooksByList()
+  bookList.value = await findBooksByList(`/local/books/${props.listName}`)
 })
 </script>
 

@@ -60,7 +60,7 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useListStore } from './state';
-import { getLists } from './utils/common';
+import { getLists, getToken } from './utils/common';
 
 const drawer = ref<boolean>(false)
 const router = useRouter()
@@ -83,6 +83,7 @@ function goLogin() {
 }
 
 onMounted(async () => {
+  await getToken()
   await getLists()
 })
 </script>
