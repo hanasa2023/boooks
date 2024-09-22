@@ -14,7 +14,7 @@ export async function getToken(): Promise<void> {
 
 export async function getLists(): Promise<void> {
   const res = await axios.post('api/fs/list', {
-    path: '/local/books',
+    path: '/123/local/books',
   })
   const listsData: FSData[] = res.data.data.content
   useListStore().list = []
@@ -23,15 +23,15 @@ export async function getLists(): Promise<void> {
   })
 }
 
-export async function findBooksByList(listName: string): Promise<FSData[]> {
+export async function findFilesByList(listName: string): Promise<FSData[]> {
   const res = await axios.post('/api/fs/list', {
     path: listName,
     password: '',
   })
-  const bookList: FSData[] = []
+  const fileList: FSData[] = []
   const list: FSData[] = res.data.data.content
   list.forEach((d) => {
-    if (!d.is_dir) bookList.push(d)
+    if (!d.is_dir) fileList.push(d)
   })
-  return bookList
+  return fileList
 }

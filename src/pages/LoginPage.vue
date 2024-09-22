@@ -49,17 +49,18 @@ const relativeBg = computed<string>(() => {
       return 'bg-desktop bg'
   }
 })
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 import { useDisplay } from 'vuetify'
 
 // TODO: 加密密码
 const password = ref<string>('')
-const router = useRouter()
+// const router = useRouter()
 
 function onLogin() {
   if (password.value == '2022151701') {
     password.value = ''
-    router.push('/manage')
+    window.open('https://cloudisk.hanasaki.tech?@login', '_blank')
+    // router.push('/manage')
   }
 }
 </script>

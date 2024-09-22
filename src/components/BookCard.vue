@@ -1,26 +1,39 @@
 <template>
-  <v-card
-    :href="`baseUrl/123/local/books/${listName}/${name}`"
-    :width="200"
-    :elevation="12"
-  >
-    <v-img :src="imgSrc"></v-img>
+  <v-card :width="210" :elevation="0" style="background-color: transparent">
+    <v-img
+      class="elevation-12 rounded-sm"
+      :src="`https://cloudisk.hanasaki.tech/p/123/local/books/${listName}/${name.slice(
+        0,
+        name.length - 4
+      )}_thumbnail.png?sign=${thumbSign}`"
+      @click="goToPreview()"
+    ></v-img>
+    <v-card-text style="color: #ff9800" @click="downloadFile()">
+      {{ name }}
+    </v-card-text>
   </v-card>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { generatePdfThumbnailUrl } from '../utils/createThumbnail'
+import { useRouter } from 'vue-router'
 import { BookData } from '../utils/typing'
 
+const router = useRouter()
+
 const props = defineProps<BookData>()
-const imgSrc = ref<string>('')
-onMounted(async () => {
-  imgSrc.value = await generatePdfThumbnailUrl(
-    `baseUrl/p/123/local/books/${props.listName}/${props.name}`,
-    props.sign
+
+function goToPreview() {
+  router.push(
+    `/preview/${props.listName}/${props.name}/${props.sign}/${props.thumbSign}`
   )
-})
+}
+
+function downloadFile() {
+  window.open(
+    `https://cloudisk.hanasaki.tech/p/123/local/books/${props.listName}/${props.name}?sign=${props.sign}`,
+    '_blank'
+  )
+}
 </script>
 
 <style scoped></style>

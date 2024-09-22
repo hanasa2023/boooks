@@ -26,7 +26,7 @@
           v-for="(name, index) in lists.list"
           :key="index"
           prepend-icon="mdi-view-dashboard"
-          :title="name == 'hxy' ? '核学院' : name"
+          :title="name"
           @click="goBook(name)"
         ></v-list-item>
       </v-list>

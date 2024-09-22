@@ -10,35 +10,10 @@ export interface TokenResponse {
 
 export interface BookData {
   name: string
-  sign: string
   listName: string
+  sign: string
+  thumbSign: string
 }
-
-// {
-//   "code": 200,
-//   "message": "success",
-//   "data": {
-//     "content": [
-//       {
-//         "name": "hxy",
-//         "size": 0,
-//         "is_dir": true,
-//         "modified": "2024-09-20T19:09:36.912920863+08:00",
-//         "created": "2024-09-20T19:08:25.942139983+08:00",
-//         "sign": "",
-//         "thumb": "",
-//         "type": 1,
-//         "hashinfo": "null",
-//         "hash_info": null
-//       }
-//     ],
-//     "total": 1,
-//     "readme": "",
-//     "header": "",
-//     "write": false,
-//     "provider": "Local"
-//   }
-// }
 
 export interface FSData {
   name: string
